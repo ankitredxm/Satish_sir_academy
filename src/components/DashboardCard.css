@@ -1,0 +1,38 @@
+.dashboard-card {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  min-height: 136px;
+  padding: 22px;
+  border: 1px solid #fde68a;
+  border-radius: 18px;
+  background: #ffffff;
+  box-shadow: 0 14px 30px rgba(202, 138, 4, 0.1);
+}
+
+.dashboard-card::after {
+  position: absolute;
+  right: -28px;
+  bottom: -34px;
+  width: 92px;
+  height: 92px;
+  border-radius: 999px;
+  background: #fef3c7;
+  content: "";
+}
+
+.dashboard-card h2 {
+  position: relative;
+  z-index: 1;
+  color: #a16207;
+  font-size: 2.2rem;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.dashboard-card p {
+  position: relative;
+  z-index: 1;
+  color: #57534e;
+  font-weight: 700;
+}

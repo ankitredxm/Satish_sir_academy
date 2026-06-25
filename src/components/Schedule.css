@@ -1,0 +1,113 @@
+.schedule-rail {
+  position: relative;
+  display: grid;
+  gap: 22px;
+  padding-left: 34px;
+}
+
+.schedule-rail::before {
+  position: absolute;
+  top: 12px;
+  bottom: 12px;
+  left: 18px;
+  width: 5px;
+  border-radius: 999px;
+  background: linear-gradient(#facc15, #fde68a);
+  content: "";
+}
+
+.rail-station {
+  position: relative;
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr);
+  gap: 14px;
+  align-items: center;
+}
+
+.station-marker {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  width: 40px;
+  height: 40px;
+  place-items: center;
+  border: 4px solid #fffbeb;
+  border-radius: 999px;
+  background: #facc15;
+  box-shadow: 0 8px 18px rgba(202, 138, 4, 0.22);
+}
+
+.station-marker span {
+  color: #422006;
+  font-weight: 900;
+}
+
+.station-card {
+  padding: 18px;
+  border: 1px solid #fde68a;
+  border-radius: 18px;
+  background: #ffffff;
+  box-shadow: 0 12px 26px rgba(120, 113, 108, 0.08);
+}
+
+.station-time {
+  color: #ca8a04;
+  font-size: 0.82rem;
+  font-weight: 900;
+  margin-bottom: 6px;
+}
+
+.station-card h3 {
+  color: #1f2937;
+  margin-bottom: 8px;
+}
+
+.station-card p {
+  color: #57534e;
+  font-weight: 700;
+  margin-top: 4px;
+}
+
+.station-status {
+  display: inline-block;
+  margin-top: 14px;
+  padding: 7px 12px;
+  border-radius: 999px;
+  font-size: 0.82rem;
+  font-weight: 900;
+}
+
+.station-status.completed {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.station-status.live {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.station-status.upcoming {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+@media (max-width: 560px) {
+  .schedule-rail {
+    padding-left: 22px;
+  }
+
+  .schedule-rail::before {
+    left: 12px;
+  }
+
+  .rail-station {
+    grid-template-columns: 34px minmax(0, 1fr);
+  }
+
+  .station-marker {
+    width: 32px;
+    height: 32px;
+    border-width: 3px;
+  }
+}

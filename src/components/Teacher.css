@@ -1,0 +1,126 @@
+.teacher-action-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.teacher-action-card {
+  min-height: 118px;
+  padding: 18px;
+  border: 1px solid #fde68a;
+  border-radius: 18px;
+  background: linear-gradient(135deg, #ffffff, #fffbeb);
+  color: #92400e;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 900;
+  text-align: left;
+  box-shadow: 0 12px 26px rgba(202, 138, 4, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.teacher-action-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 18px 34px rgba(202, 138, 4, 0.15);
+}
+
+.teacher-table {
+  display: grid;
+  gap: 12px;
+}
+
+.teacher-table-head,
+.teacher-table-row {
+  display: grid;
+  grid-template-columns: 1.4fr 0.6fr 1fr;
+  gap: 14px;
+  align-items: center;
+}
+
+.teacher-table-head {
+  padding: 0 16px;
+  color: #92400e;
+  font-size: 0.82rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.teacher-table-row {
+  padding: 16px;
+  border: 1px solid #fde68a;
+  border-radius: 18px;
+  background: #ffffff;
+}
+
+.teacher-table-row h3 {
+  color: #1f2937;
+  margin-bottom: 6px;
+}
+
+.teacher-table-row p {
+  color: #78716c;
+  font-weight: 700;
+}
+
+.teacher-table-row strong {
+  color: #92400e;
+}
+
+.table-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.table-actions button {
+  border: none;
+  border-radius: 999px;
+  background: #fef3c7;
+  color: #92400e;
+  cursor: pointer;
+  font-weight: 800;
+  padding: 8px 11px;
+}
+
+.student-table-head,
+.student-table-row {
+  grid-template-columns: 1.2fr 0.6fr 0.7fr 1.2fr;
+}
+
+.assignment-table-head,
+.assignment-table-row {
+  grid-template-columns: 1.2fr 0.8fr 0.7fr 1.2fr;
+}
+
+.attendance-pill {
+  justify-self: start;
+  padding: 7px 12px;
+  border-radius: 999px;
+  background: #dcfce7;
+  color: #166534;
+  font-weight: 900;
+}
+
+@media (max-width: 1024px) {
+  .teacher-action-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 760px) {
+  .teacher-table-head {
+    display: none;
+  }
+
+  .teacher-table-row,
+  .student-table-row,
+  .assignment-table-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .teacher-action-grid {
+    grid-template-columns: 1fr;
+  }
+}
