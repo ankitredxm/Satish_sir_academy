@@ -1,5 +1,10 @@
 import { useState } from 'react'
 import Login from './pages/Auth/Login'
+import AdminCourses from './components/AdminCourses'
+import AdminDashboard from './components/AdminDashboard'
+import AdminSimplePage from './components/AdminSimplePage'
+import AdminStudents from './components/AdminStudents'
+import AdminTeachers from './components/AdminTeachers'
 import Navbar from './components/Navbar'
 import Sidebar from './components/Sidebar'
 import DashboardCard from './components/DashboardCard'
@@ -50,11 +55,30 @@ const teacherStats = [
   { title: 'Assignments Created', count: '18' },
 ]
 
+const adminStats = [
+  { title: 'Total Students', count: '129' },
+  { title: 'Total Teachers', count: '12' },
+  { title: 'Total Courses', count: '18' },
+  { title: 'Total Enrollments', count: '246' },
+]
+
 const teacherStudents = [
   { name: 'Ankit Kumar', rollNo: 'SA-101', attendance: '92%', course: 'Java Programming' },
   { name: 'Riya Singh', rollNo: 'SA-102', attendance: '88%', course: 'DBMS' },
   { name: 'Mohit Verma', rollNo: 'SA-103', attendance: '76%', course: 'Data Structures' },
   { name: 'Neha Sharma', rollNo: 'SA-104', attendance: '95%', course: 'Java Programming' },
+]
+
+const adminStudents = [
+  { name: 'Ankit Kumar', email: 'ankit@example.com', course: 'Java Programming' },
+  { name: 'Riya Singh', email: 'riya@example.com', course: 'DBMS' },
+  { name: 'Mohit Verma', email: 'mohit@example.com', course: 'Data Structures' },
+]
+
+const adminTeachers = [
+  { name: 'Satish Kumar', department: 'Computer Science' },
+  { name: 'Priya Sharma', department: 'Database Systems' },
+  { name: 'Amit Verma', department: 'Programming' },
 ]
 
 const assignments = [
@@ -120,14 +144,29 @@ const teacherProfile = {
   joined: 'January 2024',
 }
 
+const adminProfile = {
+  name: 'Admin User',
+  phone: '+91 90000 00000',
+  email: 'admin@satishacademy.com',
+  imageUrl: 'https://i.pravatar.cc/240?img=47',
+  role: 'Admin',
+  course: 'Academy Administration',
+  studentId: 'ADM-2026-001',
+  batch: 'All Batches',
+  address: 'Patna, Bihar',
+  joined: 'January 2024',
+}
+
 function App() {
   const [currentUser, setCurrentUser] = useState(null)
   const [activePage, setActivePage] = useState('Dashboard')
   const [selectedCourse, setSelectedCourse] = useState(null)
   const [uploadedFiles, setUploadedFiles] = useState({})
+  const [isDarkMode, setIsDarkMode] = useState(false)
   const isProfilePage = activePage === 'Profile'
   const isTeacher = currentUser?.role === 'teacher'
-  const activeProfile = isTeacher ? teacherProfile : studentProfile
+  const isAdmin = currentUser?.role === 'admin'
+  const activeProfile = isAdmin ? adminProfile : isTeacher ? teacherProfile : studentProfile
   const displayName = currentUser?.username || activeProfile.name
 
   const handleNavigate = (page) => {
@@ -152,8 +191,13 @@ function App() {
   }
 
   return (
-    <div className="app-shell">
-      <Navbar user={currentUser} onLogout={handleLogout} />
+    <div className={`app-shell ${isDarkMode ? 'dark-mode' : ''}`}>
+      <Navbar
+        user={currentUser}
+        onLogout={handleLogout}
+        isDarkMode={isDarkMode}
+        onToggleTheme={() => setIsDarkMode((enabled) => !enabled)}
+      />
       <div className="app-body">
         <Sidebar
           activePage={activePage}
@@ -164,6 +208,24 @@ function App() {
         <main className="main-content">
           {isProfilePage ? (
             <Profile profile={activeProfile} />
+          ) : isAdmin && activePage === 'Students' ? (
+            <AdminStudents students={adminStudents} />
+          ) : isAdmin && activePage === 'Teachers' ? (
+            <AdminTeachers teachers={adminTeachers} />
+          ) : isAdmin && activePage === 'Courses' ? (
+            <AdminCourses courses={courses} />
+          ) : isAdmin && activePage === 'Reports' ? (
+            <AdminSimplePage
+              eyebrow="Reports"
+              title="Academy Reports"
+              text="Review enrollments, attendance, course activity, and assignment performance reports."
+            />
+          ) : isAdmin && activePage === 'Settings' ? (
+            <AdminSimplePage
+              eyebrow="Settings"
+              title="Admin Settings"
+              text="Manage academy preferences, access rules, notification settings, and portal controls."
+            />
           ) : isTeacher && activePage === 'Courses' ? (
             <TeacherCourses courses={courses} />
           ) : isTeacher && activePage === 'Students' ? (
@@ -225,6 +287,8 @@ function App() {
               stats={teacherStats}
               onNavigate={handleNavigate}
             />
+          ) : isAdmin ? (
+            <AdminDashboard stats={adminStats} />
           ) : (
             <>
               <section className="hero-panel">

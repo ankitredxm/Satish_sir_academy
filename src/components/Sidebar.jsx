@@ -3,10 +3,15 @@ import "./Sidebar.css";
 
 const studentMenuItems = ["Dashboard", "Courses", "Assignments", "Schedule", "Profile", "Logout"];
 const teacherMenuItems = ["Dashboard", "Courses", "Students", "Assignments", "Profile", "Logout"];
+const adminMenuItems = ["Dashboard", "Students", "Teachers", "Courses", "Reports", "Settings", "Logout"];
 
 const Sidebar = ({ activePage, onNavigate, role, onLogout }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const menuItems = role === "teacher" ? teacherMenuItems : studentMenuItems;
+  const menuItems = role === "admin"
+    ? adminMenuItems
+    : role === "teacher"
+      ? teacherMenuItems
+      : studentMenuItems;
 
   const handleNavigate = (item) => {
     if (item === "Logout") {

@@ -1,6 +1,6 @@
 import "./Navbar.css";
 
-const Navbar = ({ user, onLogout }) => {
+const Navbar = ({ user, onLogout, isDarkMode, onToggleTheme }) => {
   const initial = user.username.charAt(0).toUpperCase();
 
   return (
@@ -8,6 +8,9 @@ const Navbar = ({ user, onLogout }) => {
       <h2>Satish Academy</h2>
 
       <div className="nav-right">
+        <button className="theme-toggle" type="button" onClick={onToggleTheme}>
+          {isDarkMode ? "Light" : "Dark"}
+        </button>
         <div className="user-greeting">
           <span className="user-avatar">{initial}</span>
           <div>
